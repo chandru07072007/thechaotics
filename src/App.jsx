@@ -190,7 +190,7 @@ function App() {
       <section className="page-section welcome-section" id="welcome">
         <div className="welcome-content">
           <h1 className="welcome-subtitle">Welcome To</h1>
-          <div className="welcome-title">THE CHOCTIE</div>
+          <div className="welcome-title">THE CHAOTICS</div>
         </div>
         <div
           className="scroll-indicator"
