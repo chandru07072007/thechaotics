@@ -1,0 +1,834 @@
+/* Main Application Container with Smooth Natural Scrolling */
+.app {
+  width: 100%;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  background-color: #f5f5f5;
+}
+
+/* Individual Fullscreen Sections */
+.page-section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 2rem;
+  box-sizing: border-box;
+  position: relative;
+}
+
+/* ===== SECTION 1: WELCOME SCREEN ===== */
+.welcome-content {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.4rem, 3.5vw, 2.5rem);
+  max-width: 1100px;
+  width: 100%;
+}
+
+.welcome-subtitle {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: clamp(1.4rem, 3.2vw, 2.3rem);
+  font-weight: 400;
+  color: #181818;
+  letter-spacing: 0.01em;
+  line-height: 1.2;
+}
+
+.welcome-title {
+  font-family: 'Castellar', 'Times New Roman', serif;
+  font-size: clamp(2.6rem, 7.8vw, 6.2rem);
+  font-weight: normal;
+  letter-spacing: clamp(0.04em, 0.2vw, 0.08em);
+  color: #050505;
+  line-height: 1.05;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+/* ===== SECTION 2: PROBLEM STATEMENT ===== */
+.problem-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 1020px;
+  gap: clamp(1.5rem, 3vw, 2.6rem);
+}
+
+.problem-header {
+  font-family: 'Copperplate Gothic Bold', 'Copperplate', 'Cinzel', serif;
+  font-size: clamp(1.8rem, 4.2vw, 3.2rem);
+  font-weight: 700;
+  color: #000000;
+  letter-spacing: clamp(0.04em, 0.15vw, 0.08em);
+  text-transform: uppercase;
+  text-align: center;
+}
+
+/* Video Box Frame matching aesthetic */
+.video-frame-box {
+  width: 100%;
+  max-width: 1000px;
+  aspect-ratio: 16 / 9.5;
+  background-color: #000000;
+  border: 1.5px solid #000000;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.video-player {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background-color: #000000;
+  outline: none;
+}
+
+/* ===== SECTION 3: OUR SOLUTION ===== */
+.solution-section {
+  justify-content: flex-start;
+  padding-top: 3.5rem;
+  padding-bottom: 6rem;
+  overflow-x: hidden;
+}
+
+.solution-header-container {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  margin-bottom: clamp(2rem, 3.5vw, 3.2rem);
+}
+
+.solution-title {
+  font-family: 'Castellar', 'Times New Roman', serif;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  font-weight: normal;
+  letter-spacing: clamp(0.05em, 0.15vw, 0.1em);
+  color: #050505;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+.solution-subtitle {
+  font-family: 'Cinzel', 'Copperplate Gothic Bold', 'Times New Roman', serif;
+  font-size: clamp(0.85rem, 1.8vw, 1.25rem);
+  font-weight: 500;
+  color: #1a1a1a;
+  letter-spacing: clamp(0.08em, 0.25vw, 0.18em);
+  text-transform: uppercase;
+}
+
+/* 4-Card Descending Staircase Layout with Flow Connectors */
+/* 4-Card Descending Staircase Layout */
+.solution-staircase {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(1.2rem, 2.8vw, 3.2rem);
+  width: 100%;
+  max-width: 1140px;
+  align-items: flex-start;
+  position: relative;
+  padding: 0 0.5rem;
+}
+
+/* Solution Card Container */
+.solution-card-wrapper {
+  position: relative;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.solution-card {
+  width: 100%;
+  aspect-ratio: 16 / 12;
+  background-color: #ffffff;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1.5px solid #d5d5d5;
+  padding: 0.6rem;
+}
+
+/* Staggered Vertical Staircase Offsets matching reference image */
+.card-wrapper-1 {
+  margin-top: 0;
+}
+
+.card-wrapper-2 {
+  margin-top: clamp(2.5rem, 6vw, 5.5rem);
+}
+
+.card-wrapper-3 {
+  margin-top: clamp(5rem, 12vw, 11rem);
+}
+
+.card-wrapper-4 {
+  margin-top: clamp(7.5rem, 18vw, 16.5rem);
+}
+
+/* Card Step Label Bar */
+.card-step-badge {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.6rem;
+  padding: 0 0.2rem;
+}
+
+.card-step-number {
+  font-family: 'Cinzel', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #666666;
+  letter-spacing: 0.08em;
+}
+
+.card-step-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #111111;
+  text-align: right;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 140px;
+}
+
+/* Scroll Animation Triggered Sequence */
+.solution-section.is-visible .card-wrapper-1 .solution-card {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.15s;
+}
+
+.solution-section.is-visible .card-wrapper-2 .solution-card {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.35s;
+}
+
+.solution-section.is-visible .card-wrapper-3 .solution-card {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.55s;
+}
+
+.solution-section.is-visible .card-wrapper-4 .solution-card {
+  opacity: 1;
+  transform: translateY(0);
+  transition-delay: 0.75s;
+}
+
+/* Card Visual Content - Complete Uncropped View */
+.card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  transition: transform 0.4s ease;
+  display: block;
+}
+
+/* Dashing Border Effect on Cursor Action */
+.solution-card-wrapper:hover .solution-card {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.15);
+  border: 2px dashed #111111;
+  animation: dashingBorder 1.2s linear infinite;
+}
+
+.solution-card-wrapper:hover .card-image {
+  transform: scale(1.05);
+}
+
+@keyframes dashingBorder {
+  0% {
+    border-color: #111111;
+  }
+  50% {
+    border-color: #666666;
+  }
+  100% {
+    border-color: #111111;
+  }
+}
+
+/* Dashing badge indicator on hover */
+.cursor-hint-badge {
+  position: absolute;
+  bottom: 0.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  letter-spacing: 0.04em;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  white-space: nowrap;
+  backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.solution-card-wrapper:hover .cursor-hint-badge {
+  opacity: 1;
+  transform: translateX(-50%) translateY(-2px);
+}
+
+/* ===== SECTION 4: UNIFIED SOLUTION (Alternating Zig-Zag Grid) ===== */
+.unified-section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 5rem 2rem 6rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  scroll-snap-align: start;
+}
+
+.unified-title {
+  font-family: 'Castellar', 'Times New Roman', serif;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  font-weight: normal;
+  letter-spacing: clamp(0.05em, 0.15vw, 0.1em);
+  color: #050505;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.unified-rows-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(3.5rem, 6.5vw, 6rem);
+  max-width: 1080px;
+  width: 100%;
+  margin-bottom: clamp(4.5rem, 8vw, 7.5rem);
+}
+
+.unified-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  width: 100%;
+  opacity: 0;
+  transform: translateY(35px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.unified-row.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.unified-row.reverse {
+  flex-direction: row-reverse;
+}
+
+/* Image Box matching reference image with 1.5px solid border */
+.unified-image-box {
+  flex: 1.1;
+  aspect-ratio: 16 / 10.5;
+  background-color: #d1d5db;
+  border: 1.5px solid #000000;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.04);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+}
+
+.unified-image-box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.12);
+}
+
+.unified-image-box img,
+.unified-image-box video,
+.unified-row-media {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.unified-image-box img {
+  object-fit: contain;
+  padding: 0.6rem;
+  background-color: #ffffff;
+}
+
+.unified-image-box video,
+.unified-row-video {
+  object-fit: cover;
+  background-color: #000000;
+}
+
+/* Text Block in alternating rows */
+.unified-text-box {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.9rem;
+  padding: 0 0.5rem;
+}
+
+.unified-row-title {
+  font-family: 'Cinzel', 'Copperplate Gothic Bold', serif;
+  font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.unified-row-para {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.12rem);
+  line-height: 1.68;
+  color: #2b2b2b;
+  letter-spacing: 0.01em;
+}
+
+/* ===== SECTION 5: BOTTOM SHOWCASE (TITLE) ===== */
+.showcase-container {
+  width: 100%;
+  max-width: 1080px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.8rem;
+  margin-top: 1rem;
+}
+
+.showcase-title {
+  font-family: 'Castellar', 'Times New Roman', serif;
+  font-size: clamp(2.2rem, 5.5vw, 4.2rem);
+  font-weight: normal;
+  letter-spacing: clamp(0.05em, 0.15vw, 0.1em);
+  color: #050505;
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.showcase-box {
+  width: 100%;
+  aspect-ratio: 16 / 8.5;
+  background-color: #000000;
+  border: 1.5px solid #000000;
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+}
+
+.showcase-box:hover {
+  transform: translateY(-3px);
+}
+
+.showcase-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #000000;
+  display: block;
+}
+
+.modal-media-video {
+  width: 100%;
+  height: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  background-color: #000000;
+  display: block;
+}
+
+.showcase-placeholder-label {
+  font-family: 'Cinzel', 'Copperplate Gothic Bold', serif;
+  font-size: clamp(1rem, 1.8vw, 1.3rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #444444;
+  text-transform: uppercase;
+}
+
+/* ===== MODAL / EXPANDED DETAIL VIEW ===== */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(245, 245, 245, 0.92);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  animation: modalFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.modal-content-container {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  max-width: 1080px;
+  width: 100%;
+  position: relative;
+  animation: modalSlideUp 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Left Box: Full Image View Frame */
+.modal-image-box {
+  flex: 1.15;
+  background-color: #ffffff;
+  border: 1.5px solid #111111;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  position: relative;
+  min-height: 340px;
+}
+
+.modal-image-box img {
+  width: 100%;
+  height: 100%;
+  max-height: 400px;
+  object-fit: contain;
+  display: block;
+}
+
+.modal-image-box.has-video {
+  padding: 0;
+  background-color: #000000;
+  overflow: hidden;
+}
+
+.modal-image-box iframe {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border: none;
+  display: block;
+}
+
+.video-frame-box iframe,
+.technical-approach-box iframe,
+.unified-image-box iframe,
+.showcase-box iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: #000000;
+  display: block;
+}
+
+/* Right Box: Bordered Details Card matching reference image */
+.modal-details-box {
+  flex: 1;
+  background-color: #f7f5f4;
+  border: 1.5px solid #111111;
+  padding: clamp(1.8rem, 3.5vw, 2.8rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+  position: relative;
+  min-height: 340px;
+}
+
+.modal-step-tag {
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #777777;
+  letter-spacing: 0.12em;
+  margin-bottom: 0.5rem;
+  text-transform: uppercase;
+}
+
+.modal-details-title {
+  font-family: 'Cinzel', 'Copperplate Gothic Bold', 'Times New Roman', serif;
+  font-size: clamp(1.4rem, 2.2vw, 1.95rem);
+  font-weight: 600;
+  color: #141414;
+  margin-bottom: 1.4rem;
+  letter-spacing: 0.02em;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+.modal-details-text {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: clamp(0.95rem, 1.4vw, 1.15rem);
+  line-height: 1.7;
+  color: #222222;
+  letter-spacing: 0.005em;
+}
+
+/* Modal Close & Navigation Controls */
+.modal-close-btn {
+  position: absolute;
+  top: -2.8rem;
+  right: 0;
+  background: #111111;
+  color: #ffffff;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  transform: scale(1.1);
+  background: #333333;
+}
+
+/* Modal Step Switchers */
+.modal-nav-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1.5px solid #111111;
+  color: #111111;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
+}
+
+.modal-nav-btn.prev {
+  left: -3.8rem;
+}
+
+.modal-nav-btn.next {
+  right: -3.8rem;
+}
+
+.modal-nav-btn:hover {
+  background: #111111;
+  color: #ffffff;
+  border-color: #111111;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.97);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Subtle Animated Scroll Down Hint */
+.scroll-indicator {
+  position: absolute;
+  bottom: 1.8rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0.55;
+  transition: opacity 0.3s ease;
+  cursor: pointer;
+  animation: bounce 2s infinite ease-in-out;
+}
+
+.scroll-indicator:hover {
+  opacity: 0.9;
+}
+
+.scroll-arrow {
+  width: 14px;
+  height: 14px;
+  border-right: 2px solid #333333;
+  border-bottom: 2px solid #333333;
+  transform: rotate(45deg);
+}
+
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  40% {
+    transform: translateX(-50%) translateY(-7px);
+  }
+  60% {
+    transform: translateX(-50%) translateY(-3px);
+  }
+}
+
+@media (max-width: 820px) {
+  .modal-content-container {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .modal-image-box {
+    width: 100%;
+    min-height: 240px;
+  }
+
+  .modal-details-box {
+    width: 100%;
+    min-height: auto;
+  }
+
+  .modal-nav-btn.prev {
+    left: 0.25rem;
+    top: auto;
+    bottom: -3.2rem;
+    transform: none;
+  }
+
+  .modal-nav-btn.next {
+    right: 0.25rem;
+    top: auto;
+    bottom: -3.2rem;
+    transform: none;
+  }
+
+  .solution-staircase {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .card-wrapper-1,
+  .card-wrapper-2,
+  .card-wrapper-3,
+  .card-wrapper-4 {
+    margin-top: 0;
+  }
+
+  .unified-row,
+  .unified-row.reverse {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .unified-image-box {
+    width: 100%;
+  }
+
+  .welcome-title {
+    white-space: normal;
+    word-break: break-word;
+  }
+}
+
+/* ===== SECTION 5: TECHNICAL APPROACH ===== */
+.technical-approach-section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 4.5rem 2rem 6.5rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.technical-approach-title {
+  font-family: 'Castellar', 'Times New Roman', serif;
+  font-size: clamp(2.4rem, 6vw, 4.8rem);
+  font-weight: normal;
+  letter-spacing: clamp(0.05em, 0.15vw, 0.1em);
+  color: #050505;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: clamp(2rem, 3.5vw, 3.5rem);
+}
+
+/* Large frame box matching the user's uploaded reference wireframe */
+.technical-approach-box {
+  width: 100%;
+  max-width: 1100px;
+  aspect-ratio: 16 / 9.5;
+  background-color: #000000;
+  border: 1.5px solid #000000;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease;
+}
+
+.technical-approach-box:hover {
+  transform: translateY(-4px) scale(1.005);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.18);
+}
+
+.technical-approach-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background-color: #000000;
+  display: block;
+}

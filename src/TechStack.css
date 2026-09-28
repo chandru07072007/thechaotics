@@ -1,0 +1,471 @@
+/* ==========================================================================
+   TECHNOLOGY STACK - CAPSULE PILL DESIGN (MATCHING REFERENCE SKETCH)
+   - 3 Stacks: HARDWARE STACK, DATA PROCESS STACK, AI & DEPLOYMENT STACK
+   - Castellar Serif Titles
+   - Capsule Pill Bars with Gray Fill & 2px Solid Black Border
+   - ONLY Tech Logos/Icons inside the Pill Bar (No Names)
+   - Interactive Click Modal revealing Name & "What to do" in Coal Mining
+   ========================================================================== */
+
+.tech-stack-section {
+  width: 100%;
+  min-height: 100vh;
+  padding: 5rem 2rem 7rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  box-sizing: border-box;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Stacks Container */
+.pill-stacks-container {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(3rem, 5.5vw, 4.8rem);
+}
+
+/* Individual Stack Group (Title + Capsule) */
+.pill-stack-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+/* Stack Title in Castellar Serif Font matching the sketch */
+.pill-stack-title {
+  font-family: 'Castellar', 'Times New Roman', serif;
+  font-size: clamp(1.8rem, 3.8vw, 3rem);
+  font-weight: normal;
+  letter-spacing: clamp(0.06em, 0.18vw, 0.12em);
+  color: #050505;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.15;
+  margin: 0;
+  user-select: none;
+}
+
+/* Capsule Pill Bar - Stadium geometry with solid black border & gray fill */
+.capsule-pill-bar {
+  width: 100%;
+  max-width: 960px;
+  min-height: 94px;
+  background-color: #cfd4dc;
+  border: 2px solid #000000;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.6rem 2.8rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08), inset 0 2px 4px rgba(255, 255, 255, 0.4);
+  position: relative;
+  box-sizing: border-box;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s ease,
+              border-color 0.3s ease;
+}
+
+.capsule-pill-bar:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 38px rgba(0, 0, 0, 0.12), inset 0 2px 4px rgba(255, 255, 255, 0.5);
+}
+
+/* Track of Icons inside the Pill */
+.capsule-icons-track {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 1rem;
+  flex-wrap: nowrap;
+}
+
+/* Individual Icon Button (Strictly Icon Only) */
+.capsule-icon-btn {
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border-radius: 50%;
+  transition: transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+              filter 0.25s ease;
+  animation: subtleFloat 3.8s ease-in-out infinite alternate;
+}
+
+.capsule-icon-btn:hover {
+  transform: scale(1.28) translateY(-6px);
+  z-index: 10;
+  filter: drop-shadow(0 10px 14px rgba(0, 0, 0, 0.22));
+}
+
+.capsule-icon-btn:active {
+  transform: scale(1.12) translateY(-2px);
+}
+
+/* Icon Container & SVG styling */
+.icon-wrapper {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+
+.tech-svg-icon {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+/* Floating Hover Tooltip (subtle hint of name) */
+.icon-hover-tooltip {
+  position: absolute;
+  bottom: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  background-color: #111111;
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.35rem 0.75rem;
+  border-radius: 4px;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  z-index: 20;
+}
+
+.icon-hover-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #111111 transparent transparent transparent;
+}
+
+.capsule-icon-btn:hover .icon-hover-tooltip {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Subtle Floating Animation for live tech vibe */
+@keyframes subtleFloat {
+  0% {
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-4px);
+  }
+}
+
+/* ==========================================================================
+   INTERACTIVE "CLICK ICON THAT SHOW NAME WHAT TO DO" MODAL CARD
+   ========================================================================== */
+
+.tech-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(10, 10, 10, 0.72);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  animation: modalOverlayFade 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalOverlayFade {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.tech-modal-card {
+  background-color: #ffffff;
+  border: 2px solid #000000;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  max-width: 580px;
+  width: 100%;
+  padding: 2.2rem 2.4rem;
+  position: relative;
+  box-sizing: border-box;
+  animation: modalContentPop 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes modalContentPop {
+  from {
+    opacity: 0;
+    transform: scale(0.92) translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Modal Close Button */
+.tech-modal-close {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.4rem;
+  background: #111111;
+  color: #ffffff;
+  border: 1.5px solid #111111;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+
+.tech-modal-close:hover {
+  background: #000000;
+  transform: rotate(90deg) scale(1.1);
+}
+
+/* Modal Header: Icon + Name */
+.tech-modal-header {
+  display: flex;
+  align-items: center;
+  gap: 1.3rem;
+  padding-bottom: 1.4rem;
+  border-bottom: 2px solid #000000;
+  margin-bottom: 1.5rem;
+}
+
+.tech-modal-icon-badge {
+  width: 74px;
+  height: 74px;
+  min-width: 74px;
+  background-color: #f1f5f9;
+  border: 1.5px solid #000000;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  box-sizing: border-box;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.tech-modal-icon-badge .tech-svg-icon {
+  width: 100%;
+  height: 100%;
+}
+
+.tech-modal-title-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.tech-modal-category {
+  font-family: 'Cinzel', 'Copperplate Gothic Bold', serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.tech-modal-name {
+  font-family: 'Castellar', 'Times New Roman', serif;
+  font-size: clamp(1.6rem, 3.2vw, 2.3rem);
+  font-weight: normal;
+  color: #050505;
+  letter-spacing: 0.05em;
+  line-height: 1.15;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Modal Body: "What to do" */
+.tech-modal-body {
+  margin-bottom: 1.8rem;
+}
+
+.what-to-do-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-bottom: 0.85rem;
+}
+
+.what-to-do-badge {
+  font-family: 'Cinzel', serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  background-color: #111111;
+  color: #ffffff;
+  padding: 0.2rem 0.55rem;
+  border-radius: 2px;
+  letter-spacing: 0.06em;
+}
+
+.what-to-do-label {
+  font-family: 'Cinzel', 'Copperplate Gothic Bold', serif;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #111111;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.what-to-do-desc {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 1.02rem;
+  line-height: 1.7;
+  color: #262626;
+  margin: 0;
+  background-color: #f8fafc;
+  padding: 1.15rem 1.3rem;
+  border-left: 3.5px solid #000000;
+  border-radius: 0 4px 4px 0;
+}
+
+/* Modal Footer */
+.tech-modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.25rem;
+  border-top: 1px dashed #cbd5e1;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.modal-status-pill {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #166534;
+  background-color: #dcfce7;
+  border: 1px solid #bbf7d0;
+  padding: 0.3rem 0.75rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  text-transform: uppercase;
+}
+
+.status-live-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #16a34a;
+  box-shadow: 0 0 6px #16a34a;
+  animation: dotBlink 1.4s infinite ease-in-out;
+}
+
+@keyframes dotBlink {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(1.3); }
+}
+
+.modal-dismiss-btn {
+  background-color: #111111;
+  color: #ffffff;
+  border: 1.5px solid #111111;
+  font-family: 'Cinzel', serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.55rem 1.6rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.modal-dismiss-btn:hover {
+  background-color: #333333;
+  border-color: #333333;
+  transform: translateY(-1px);
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN FOR TABLETS & MOBILES
+   ========================================================================== */
+
+@media (max-width: 900px) {
+  .capsule-pill-bar {
+    padding: 0.5rem 1.6rem;
+    min-height: 84px;
+  }
+
+  .icon-wrapper {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (max-width: 640px) {
+  .tech-stack-section {
+    padding: 3.5rem 1.2rem 5rem 1.2rem;
+  }
+
+  .capsule-pill-bar {
+    border-radius: 36px;
+    padding: 0.75rem 1.2rem;
+    min-height: auto;
+  }
+
+  .capsule-icons-track {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    justify-content: center;
+  }
+
+  .icon-wrapper {
+    width: 40px;
+    height: 40px;
+  }
+
+  .tech-modal-card {
+    padding: 1.6rem 1.4rem;
+  }
+
+  .tech-modal-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .what-to-do-desc {
+    font-size: 0.92rem;
+  }
+}

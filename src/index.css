@@ -1,0 +1,40 @@
+@font-face {
+  font-family: 'Castellar';
+  src: local('Castellar'),
+       url('/fonts/castellar.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Copperplate Gothic Bold';
+  src: local('Copperplate Gothic Bold'),
+       local('Copperplate'),
+       url('/fonts/copperplate-bold.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #f5f5f5;
+  color: #111111;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  user-select: none;
+}
