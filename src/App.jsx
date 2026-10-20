@@ -19,7 +19,6 @@ const solutions = [
     title: 'Self-Healing LoRa Mesh Telemetry',
     image: '/image/comucation.webp',
     video: '/video/unifited sloution/self healing.mp4',
-    youtubeId: '6mE1un6cEhE',
     mediaType: 'video',
     description:
       'Autonomous low-power wireless mesh network connecting subterranean and surface sensors. The self-healing protocol dynamically auto-reroutes around coal seam obstacles with zero data loss.',
@@ -31,7 +30,6 @@ const solutions = [
     title: 'Predictive 3D Digital Twin Simulation',
     image: '/image/digital-twin-main.webp',
     video: '/video/unifited sloution/digit twin.mp4',
-    youtubeId: 'LAc7zLoZ8r4',
     mediaType: 'video',
     description:
       'Real-time 3D digital twin synchronized with live telemetry streams to simulate rock mass displacement, void convergence, and forecast structural collapse windows hours before failure.',
@@ -40,13 +38,12 @@ const solutions = [
     id: 4,
     step: '04',
     shortTitle: 'Geological Model',
-    title: 'Coal Mining Geological Section & MFTabPFN AI',
+    title: 'Coal Mining Geological Section & Alerts',
     image: '/image/ALERT.png',
     video: '/video/unifited sloution/model.mp4',
-    youtubeId: 'RquOxPiwcUw',
     mediaType: 'video',
     description:
-      'Stratigraphic 3D geotechnical section mapping coal seams, overburden layers, and fault planes powered by MFTabPFN AI to predict strata collapse hours ahead of time.',
+      'Stratigraphic 3D geotechnical section mapping coal seams, overburden layers, and fault planes with dynamic safety thresholds and automated emergency evacuation alert workflows.',
   },
 ]
 
@@ -67,7 +64,6 @@ const unifiedFeatures = [
     text: 'Autonomous low-power wireless mesh network connecting subterranean and surface sensors. The mesh protocol features dynamic auto-rerouting and local buffering to guarantee 100% telemetry uptime in harsh coal mining terrain.',
     image: '/image/comucation.webp',
     video: '/video/unifited sloution/self healing.mp4',
-    youtubeId: '6mE1un6cEhE',
     mediaType: 'video',
     reverse: true,
   },
@@ -78,18 +74,16 @@ const unifiedFeatures = [
     text: 'Dynamic 3D digital twin synchronized with real-time sensor streams to simulate rock mass displacement, void convergence, and forecast structural collapse windows hours before failure.',
     image: '/image/digital-twin-main.webp',
     video: '/video/unifited sloution/digit twin.mp4',
-    youtubeId: 'LAc7zLoZ8r4',
     mediaType: 'video',
     reverse: false,
   },
   {
     id: 4,
-    title: 'COAL MINING GEOLOGICAL SECTION & MFTabPFN AI',
-    subtitle: 'Stratigraphic Mine Section & Deep Learning Strata AI',
-    text: 'Stratigraphic 3D geotechnical model mapping coal seams, overburden layers, and fault planes with MFTabPFN machine learning predicting convergence windows with dynamic automated evacuation alert workflows.',
+    title: 'COAL MINING GEOLOGICAL SECTION MODEL',
+    subtitle: 'Stratigraphic Mine Section & Emergency Protocol',
+    text: 'Stratigraphic 3D geotechnical model mapping coal seams, overburden layers, and fault planes with dynamic safety thresholds and automated emergency evacuation alert workflows.',
     image: '/image/ALERT.png',
     video: '/video/unifited sloution/model.mp4',
-    youtubeId: 'RquOxPiwcUw',
     mediaType: 'video',
     reverse: true,
   },
@@ -100,6 +94,7 @@ function App() {
   const solutionRef = useRef(null)
   const [isSolutionVisible, setIsSolutionVisible] = useState(false)
   const [selectedSolution, setSelectedSolution] = useState(null)
+  const [isBlueprintOpen, setIsBlueprintOpen] = useState(false)
   const [visibleRows, setVisibleRows] = useState({})
 
   useEffect(() => {
@@ -144,11 +139,12 @@ function App() {
   // Handle keyboard events (Escape to close modal, Left/Right to cycle solutions)
   useEffect(() => {
     const handleKeyDown = (e) => {
+      if (!selectedSolution) return
       if (e.key === 'Escape') {
         setSelectedSolution(null)
+        setIsBlueprintOpen(false)
         return
       }
-      if (!selectedSolution) return
       if (e.key === 'ArrowRight') {
         setSelectedSolution((prev) => {
           const nextIndex = prev.id % solutions.length
@@ -163,7 +159,7 @@ function App() {
     }
     window.addEventListener('keydown', handleKeyDown)
     return () => window.removeEventListener('keydown', handleKeyDown)
-  }, [selectedSolution])
+  }, [selectedSolution, isBlueprintOpen])
 
   const scrollTo = (id) => {
     const el = document.getElementById(id)
@@ -206,14 +202,15 @@ function App() {
         <div className="problem-content">
           <h2 className="problem-header">PROBLEM STATEMENT</h2>
           <div className="video-frame-box">
-            <iframe
+            <video
               className="video-player"
-              src="https://www.youtube.com/embed/uePBjFaCWNc?rel=0&modestbranding=1"
-              title="Problem Statement - Coal Mining Ground Subsidence"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
+              src={videoUrl}
+              controls
+              playsInline
+              preload="metadata"
+            >
+              Your browser does not support the video tag.
+            </video>
           </div>
         </div>
         <div
@@ -233,7 +230,7 @@ function App() {
       >
         <div className="solution-header-container">
           <h2 className="solution-title">OUR SOLUTION</h2>
-          <p className="solution-subtitle">YOU ARE SEE SAME SOLUTION MANY PPT</p>
+          <p className="solution-subtitle">A comprehensive approach to solving the problem</p>
         </div>
 
         {/* 4-Box Descending Diagonal Staircase Layout */}
@@ -288,23 +285,14 @@ function App() {
             >
               {/* Image / Video Box with solid black border */}
               <div
-                className={`unified-image-box ${feat.mediaType === 'video' ? 'has-video' : ''}`}
+                className="unified-image-box"
                 onClick={() => {
                   const sol = solutions.find((s) => s.id === feat.id)
                   if (sol) setSelectedSolution(sol)
                 }}
                 title={feat.mediaType === 'video' ? 'Click to open details' : 'Click to expand view'}
               >
-                {feat.mediaType === 'video' && feat.youtubeId ? (
-                  <iframe
-                    src={`https://www.youtube.com/embed/${feat.youtubeId}?rel=0&modestbranding=1`}
-                    title={feat.title}
-                    className="unified-row-media unified-row-video"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                  />
-                ) : feat.mediaType === 'video' ? (
+                {feat.mediaType === 'video' ? (
                   <video
                     src={encodeURI(feat.video)}
                     autoPlay
@@ -328,37 +316,44 @@ function App() {
           ))}
         </div>
 
-        {/* Bottom Showcase matching reference mockup */}
-        <div className="showcase-container">
-          <h2 className="showcase-title">DEMO</h2>
-          <div className="showcase-box">
-            <iframe
-              src="https://www.youtube.com/embed/vGwQXER6Wq8?rel=0&modestbranding=1"
-              title="Coal Mine Monitoring System Demo"
-              className="showcase-video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-              allowFullScreen
-            />
-          </div>
-        </div>
-
         <div
           className="scroll-indicator"
-          onClick={() => scrollTo('technical-approach')}
-          title="Scroll down to Technical Approach"
+          onClick={() => scrollTo('youtube-video')}
+          title="Scroll down to YouTube Video"
         >
           <div className="scroll-arrow" />
         </div>
       </section>
 
-      {/* Section 5: TECHNICAL APPROACH */}
-      <section className="page-section technical-approach-section" id="technical-approach">
-        <h2 className="technical-approach-title">TECHNICAL APPROACH</h2>
+      {/* Section 5: YOU TUBE VIDEO */}
+      <section className="page-section technical-approach-section" id="youtube-video">
+        <h2 className="technical-approach-title">YOU TUBE VIDEO</h2>
         <div className="technical-approach-box">
           <iframe
-            src="https://www.youtube.com/embed/JHz6DKn9OS0?rel=0&modestbranding=1"
-            title="Technical Approach Architecture Flow"
+            src="https://www.youtube.com/embed/R2IBYPBCXAk?rel=0&modestbranding=1"
+            title="YouTube Video"
+            className="technical-approach-video"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowFullScreen
+          />
+        </div>
+        <div
+          className="scroll-indicator"
+          onClick={() => scrollTo('demo')}
+          title="Scroll down to Demo"
+        >
+          <div className="scroll-arrow" />
+        </div>
+      </section>
+
+      {/* Section 6: DEMO */}
+      <section className="page-section technical-approach-section" id="demo">
+        <h2 className="technical-approach-title">DEMO</h2>
+        <div className="technical-approach-box">
+          <iframe
+            src="https://www.youtube.com/embed/vGwQXER6Wq8?rel=0&modestbranding=1"
+            title="Coal Mine Monitoring System Demo"
             className="technical-approach-video"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
@@ -398,17 +393,8 @@ function App() {
             </button>
 
             {/* Left Full Image / Video View Frame */}
-            <div className={`modal-image-box ${selectedSolution.youtubeId || selectedSolution.video ? 'has-video' : ''}`}>
-              {selectedSolution.youtubeId ? (
-                <iframe
-                  src={`https://www.youtube.com/embed/${selectedSolution.youtubeId}?rel=0&modestbranding=1&autoplay=1`}
-                  title={selectedSolution.title}
-                  className="modal-media-video"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                />
-              ) : selectedSolution.video ? (
+            <div className="modal-image-box">
+              {selectedSolution.video ? (
                 <video
                   src={encodeURI(selectedSolution.video)}
                   autoPlay
@@ -441,6 +427,38 @@ function App() {
             >
               →
             </button>
+          </div>
+        </div>
+      )}
+
+      {/* Technical Approach HD Blueprint Fullscreen Modal */}
+      {isBlueprintOpen && (
+        <div
+          className="blueprint-modal-backdrop"
+          onClick={() => setIsBlueprintOpen(false)}
+          role="dialog"
+          aria-modal="true"
+        >
+          <div
+            className="blueprint-modal-card"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="blueprint-modal-header">
+              <span>Technical Approach Architecture (HD Blueprint)</span>
+              <button
+                className="blueprint-modal-close"
+                onClick={() => setIsBlueprintOpen(false)}
+                title="Close (Esc)"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="blueprint-modal-body">
+              <img
+                src="/image/technical_approach_architecture_diagram.png"
+                alt="Technical Approach Architecture Diagram"
+              />
+            </div>
           </div>
         </div>
       )}
