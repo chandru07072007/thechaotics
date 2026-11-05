@@ -18,7 +18,7 @@ const solutions = [
     shortTitle: 'Self-Healing Mesh',
     title: 'Self-Healing LoRa Mesh Telemetry',
     image: '/image/comucation.webp',
-    video: '/video/unifited sloution/self healing.mp4',
+    youtubeId: '6mE1un6cEhE',
     mediaType: 'video',
     description:
       'Autonomous low-power wireless mesh network connecting subterranean and surface sensors. The self-healing protocol dynamically auto-reroutes around coal seam obstacles with zero data loss.',
@@ -29,7 +29,7 @@ const solutions = [
     shortTitle: 'Digital Twin',
     title: 'Predictive 3D Digital Twin Simulation',
     image: '/image/digital-twin-main.webp',
-    video: '/video/unifited sloution/digit twin.mp4',
+    youtubeId: 'LAc7zLoZ8r4',
     mediaType: 'video',
     description:
       'Real-time 3D digital twin synchronized with live telemetry streams to simulate rock mass displacement, void convergence, and forecast structural collapse windows hours before failure.',
@@ -40,7 +40,7 @@ const solutions = [
     shortTitle: 'Geological Model',
     title: 'Coal Mining Geological Section & Alerts',
     image: '/image/ALERT.png',
-    video: '/video/unifited sloution/model.mp4',
+    youtubeId: 'RquOxPiwcUw',
     mediaType: 'video',
     description:
       'Stratigraphic 3D geotechnical section mapping coal seams, overburden layers, and fault planes with dynamic safety thresholds and automated emergency evacuation alert workflows.',
@@ -63,7 +63,7 @@ const unifiedFeatures = [
     subtitle: 'Autonomous Mesh Telemetry',
     text: 'Autonomous low-power wireless mesh network connecting subterranean and surface sensors. The mesh protocol features dynamic auto-rerouting and local buffering to guarantee 100% telemetry uptime in harsh coal mining terrain.',
     image: '/image/comucation.webp',
-    video: '/video/unifited sloution/self healing.mp4',
+    youtubeId: '6mE1un6cEhE',
     mediaType: 'video',
     reverse: true,
   },
@@ -73,7 +73,7 @@ const unifiedFeatures = [
     subtitle: 'Predictive 3D Digital Twin',
     text: 'Dynamic 3D digital twin synchronized with real-time sensor streams to simulate rock mass displacement, void convergence, and forecast structural collapse windows hours before failure.',
     image: '/image/digital-twin-main.webp',
-    video: '/video/unifited sloution/digit twin.mp4',
+    youtubeId: 'LAc7zLoZ8r4',
     mediaType: 'video',
     reverse: false,
   },
@@ -83,7 +83,7 @@ const unifiedFeatures = [
     subtitle: 'Stratigraphic Mine Section & Emergency Protocol',
     text: 'Stratigraphic 3D geotechnical model mapping coal seams, overburden layers, and fault planes with dynamic safety thresholds and automated emergency evacuation alert workflows.',
     image: '/image/ALERT.png',
-    video: '/video/unifited sloution/model.mp4',
+    youtubeId: 'RquOxPiwcUw',
     mediaType: 'video',
     reverse: true,
   },
@@ -291,14 +291,13 @@ function App() {
                 title={feat.mediaType === 'video' ? 'Click to open details' : 'Click to expand view'}
               >
                 {feat.mediaType === 'video' ? (
-                  <video
-                    src={encodeURI(feat.video)}
-                    autoPlay
-                    loop
-                    muted
-                    playsInline
-                    controls
+                  <iframe
+                    src={`https://www.youtube.com/embed/${feat.youtubeId}?rel=0&modestbranding=1`}
+                    title={feat.title}
                     className="unified-row-media unified-row-video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerPolicy="strict-origin-when-cross-origin"
+                    allowFullScreen
                   />
                 ) : (
                   <img src={feat.image} alt={feat.title} className="unified-row-media" />
@@ -392,15 +391,14 @@ function App() {
 
             {/* Left Full Image / Video View Frame */}
             <div className="modal-image-box">
-              {selectedSolution.video ? (
-                <video
-                  src={encodeURI(selectedSolution.video)}
-                  autoPlay
-                  loop
-                  muted
-                  playsInline
-                  controls
+              {selectedSolution.youtubeId ? (
+                <iframe
+                  src={`https://www.youtube.com/embed/${selectedSolution.youtubeId}?rel=0&modestbranding=1`}
+                  title={selectedSolution.title}
                   className="modal-media-video"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  referrerPolicy="strict-origin-when-cross-origin"
+                  allowFullScreen
                 />
               ) : (
                 <img

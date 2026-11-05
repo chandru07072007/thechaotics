@@ -382,10 +382,12 @@
 
 .unified-image-box img,
 .unified-image-box video,
+.unified-image-box iframe,
 .unified-row-media {
   width: 100%;
   height: 100%;
   display: block;
+  border: 0;
 }
 
 .unified-image-box img {
@@ -395,9 +397,18 @@
 }
 
 .unified-image-box video,
+.unified-image-box iframe,
 .unified-row-video {
   object-fit: cover;
   background-color: #000000;
+}
+
+.modal-media-video {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border: 0;
+  display: block;
 }
 
 /* Text Block in alternating rows */
@@ -536,31 +547,6 @@
   height: 100%;
   max-height: 400px;
   object-fit: contain;
-  display: block;
-}
-
-.modal-image-box.has-video {
-  padding: 0;
-  background-color: #000000;
-  overflow: hidden;
-}
-
-.modal-image-box iframe {
-  width: 100%;
-  height: 100%;
-  min-height: 380px;
-  border: none;
-  display: block;
-}
-
-.video-frame-box iframe,
-.technical-approach-box iframe,
-.unified-image-box iframe,
-.showcase-box iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  background-color: #000000;
   display: block;
 }
 
@@ -808,27 +794,132 @@
   width: 100%;
   max-width: 1100px;
   aspect-ratio: 16 / 9.5;
+  background-color: #ffffff;
   background-color: #000000;
   border: 1.5px solid #000000;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
   display: flex;
   align-items: center;
   justify-content: center;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  padding: 1.25rem;
   transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
               box-shadow 0.3s ease;
 }
 
 .technical-approach-box:hover {
   transform: translateY(-4px) scale(1.005);
+  box-shadow: 0 16px 42px rgba(0, 0, 0, 0.14);
   box-shadow: 0 16px 42px rgba(0, 0, 0, 0.18);
 }
 
+.technical-approach-img {
 .technical-approach-video {
   width: 100%;
   height: 100%;
+  object-fit: contain;
   object-fit: cover;
   background-color: #000000;
   display: block;
+}
+
+.expand-hint-badge {
+  position: absolute;
+  bottom: 0.85rem;
+  right: 0.85rem;
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.32rem 0.78rem;
+  border-radius: 9999px;
+  letter-spacing: 0.03em;
+  opacity: 0.85;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  backdrop-filter: blur(4px);
+}
+
+.technical-approach-box:hover .expand-hint-badge {
+  opacity: 1;
+  transform: translateY(-2px);
+}
+
+/* Technical Approach Fullscreen HD Modal */
+.blueprint-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.88);
+  backdrop-filter: blur(8px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  animation: modalFadeIn 0.25s ease-out;
+}
+
+.blueprint-modal-card {
+  position: relative;
+  background: #ffffff;
+  border: 1.5px solid #000000;
+  max-width: 95vw;
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
+}
+
+.blueprint-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1.4rem;
+  background: #ffffff;
+  border-bottom: 1.5px solid #000000;
+  font-family: 'Cinzel', serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #111111;
+}
+
+.blueprint-modal-close {
+  background: #000000;
+  color: #ffffff;
+  border: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.blueprint-modal-close:hover {
+  transform: scale(1.1);
+  background: #333333;
+}
+
+.blueprint-modal-body {
+  overflow: auto;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+}
+
+.blueprint-modal-body img {
+  width: 100%;
+  max-width: 1400px;
+  height: auto;
+  object-fit: contain;
 }
