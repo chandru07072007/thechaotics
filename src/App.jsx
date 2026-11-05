@@ -90,7 +90,6 @@ const unifiedFeatures = [
 ]
 
 function App() {
-  const videoUrl = encodeURI('/video/problem/When Abandoned Mines Collapse(720P_HD).mp4')
   const solutionRef = useRef(null)
   const [isSolutionVisible, setIsSolutionVisible] = useState(false)
   const [selectedSolution, setSelectedSolution] = useState(null)
@@ -202,15 +201,14 @@ function App() {
         <div className="problem-content">
           <h2 className="problem-header">PROBLEM STATEMENT</h2>
           <div className="video-frame-box">
-            <video
+            <iframe
+              src="https://www.youtube.com/embed/R2IBYPBCXAk?rel=0&modestbranding=1"
+              title="Coal things"
               className="video-player"
-              src={videoUrl}
-              controls
-              playsInline
-              preload="metadata"
-            >
-              Your browser does not support the video tag.
-            </video>
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
           </div>
         </div>
         <div
