@@ -202,7 +202,7 @@ function App() {
           <h2 className="problem-header">PROBLEM STATEMENT</h2>
           <div className="video-frame-box">
             <iframe
-              src="https://www.youtube.com/embed/R2IBYPBCXAk?rel=0&modestbranding=1"
+              src="https://www.youtube.com/embed/uePBjFaCWNc?rel=0&modestbranding=1"
               title="Coal things"
               className="video-player"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
